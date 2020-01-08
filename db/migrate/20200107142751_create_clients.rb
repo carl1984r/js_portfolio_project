@@ -3,7 +3,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
     create_table :clients do |t|
       t.string :name
       t.string :socialsec
-      t.integer :dob
+      t.string :dob
       t.string :address
 
       t.timestamps

@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 2020_01_07_151712) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
-    t.integer "number"
-    t.string "type"
+    t.string "number"
+    t.string "utilization"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_01_07_151712) do
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "socialsec"
-    t.integer "dob"
+    t.string "dob"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
