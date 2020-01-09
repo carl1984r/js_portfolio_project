@@ -16,3 +16,13 @@ clients.each do |f|
   account = Account.create(f[1])
   ClientAccount.create(client_id: client.id, account_id: account.id)
 end
+
+accounts = [
+  {name: "College Savings - Child 1", number: "2082648", utilization: "savings"},
+  {name: "College Savings - Child 2", number: "2082649", utilization: "savings"}
+]
+
+accounts.each do |f|
+  account = Account.create(f)
+  ClientAccount.create(client_id: Client.all.first.id, account_id: account.id)
+end
