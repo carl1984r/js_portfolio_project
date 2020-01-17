@@ -65,3 +65,7 @@ body {
   border: 2px solid #FFF;
   background-color: #FFF;
 }
+
+li {
+    list-style-type: circle;
+}

@@ -26,8 +26,13 @@ function renderClients(json) {
   const hr = document.createElement('hr')
   thead.appendChild(hr)
   json.forEach(client => {
-    const li = document.createElement('li')
-    li.innerHTML = `${client.name}`
+    let a = document.createElement('a')
+    let li = document.createElement('li')
+    let link = document.createTextNode(`${client.name}`);
+    a.appendChild(link)
+    a.title = `${client.name}`
+    a.href = "http://www.google.com"
+    li.appendChild(a)
     td.appendChild(li)
   })
 }
