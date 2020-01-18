@@ -9,16 +9,8 @@ const CLIENTS_URL = `${BASE_URL}/clients`;
 //});
 
 function fetchClients() {
-  return fetch(CLIENTS_URL)
-
-  .then(function(response) {
-      return response.json();
-    })
-
-    .then(function(json) {
-      renderClients(json);
-    });
-}
+  fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json));
+  }
 
 function renderClients(json) {
   const td = document.querySelector('div.item.sidebar table tbody tr td')
@@ -35,6 +27,11 @@ function renderClients(json) {
     li.appendChild(a)
     td.appendChild(li)
   })
+}
+
+function getClient(id) {
+let url = `${CLIENTS_URL}/${id}`;
+fetch(url).then(resp => resp.json()).then(json => console.log(json));
 }
 
 document.addEventListener('DOMContentLoaded', function() {
