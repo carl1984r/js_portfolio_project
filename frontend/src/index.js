@@ -12,6 +12,18 @@ function fetchClients() {
   fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json));
   }
 
+function fetchClient(id) {
+  let url = `${CLIENTS_URL}/${id}`;
+  fetch(url).then(resp => resp.json()).then(json => renderClient(json));
+  }
+
+function renderClient(json) {
+  const td = document.querySelector('div.item.content-1 table tbody tr td')
+  const thead = document.querySelector('div.item.content-1 table thead')
+  const hr = document.createElement('hr')
+  thead.appendChild(hr)
+}
+
 function renderClients(json) {
   const td = document.querySelector('div.item.sidebar table tbody tr td')
   const thead = document.querySelector('div.item.sidebar table thead')
@@ -23,15 +35,11 @@ function renderClients(json) {
     let link = document.createTextNode(`${client.name}`);
     a.appendChild(link)
     a.title = `${client.name}`
-    a.href = "http://www.google.com"
+    //a.href = `${CLIENTS_URL}/${client.id}`
+    a.onclick = function() {fetchClient(`${client.id}`)}
     li.appendChild(a)
     td.appendChild(li)
   })
-}
-
-function getClient(id) {
-let url = `${CLIENTS_URL}/${id}`;
-fetch(url).then(resp => resp.json()).then(json => console.log(json));
 }
 
 document.addEventListener('DOMContentLoaded', function() {
