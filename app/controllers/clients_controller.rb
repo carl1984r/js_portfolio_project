@@ -6,8 +6,8 @@ class ClientsController < ApplicationController
   end
 
   def show
-    recipe = Recipe.find_by(id: params[:id])
-    render json: recipe
+    client = Client.find_by(id: params[:id])
+    render json: client
   end
 
 end
