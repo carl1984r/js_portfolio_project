@@ -35,8 +35,8 @@ function renderClients(json) {
     let link = document.createTextNode(`${client.name}`);
     a.appendChild(link)
     a.title = `${client.name}`
-    //a.href = `${CLIENTS_URL}/${client.id}`
-    a.onclick = function() {fetchClient(`${client.id}`)}
+    a.href = `${CLIENTS_URL}/${client.id}`
+    //a.onclick = function() {fetchClient(`${client.id}`)}
     li.appendChild(a)
     td.appendChild(li)
   })
