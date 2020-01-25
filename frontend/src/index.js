@@ -1,6 +1,7 @@
 
 const BASE_URL = "http://localhost:3000";
 const CLIENTS_URL = `${BASE_URL}/clients`;
+const CLIENT_ACCOUNTS_URL = `${BASE_URL}/client_accounts`;
 
 //$(document).ready(function() {
 //  console.log('Hello World');
@@ -9,12 +10,12 @@ const CLIENTS_URL = `${BASE_URL}/clients`;
 //});
 
 function fetchClients() {
-  fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json));
+  fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json.data));
   }
 
 function fetchClient(id) {
-  let url = `${CLIENTS_URL}/${id}`;
-  fetch(url).then(resp => resp.json()).then(json => renderClient(json));
+  let url = `${CLIENT_ACCOUNTS_URL}/${id}`;
+  fetch(url).then(resp => resp.json()).then(json => renderClient(json.data));
   }
 
 function renderClient(json) {
@@ -32,11 +33,11 @@ function renderClients(json) {
   json.forEach(client => {
     let a = document.createElement('a')
     let li = document.createElement('li')
-    let link = document.createTextNode(`${client.name}`);
+    let link = document.createTextNode(`${client["attributes"]["name"]}`);
     a.appendChild(link)
-    a.title = `${client.name}`
-    a.href = `${CLIENTS_URL}/${client.id}`
-    //a.onclick = function() {fetchClient(`${client.id}`)}
+    //a.title = `${client.attributes}`
+    //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
+    a.onclick = function() {fetchClient(`${client["id]"]}`)}
     li.appendChild(a)
     td.appendChild(li)
   })

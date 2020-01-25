@@ -1,4 +1,6 @@
 class ClientAccountSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :client, :account
+  belongs_to :client
+  belongs_to :account
 end
