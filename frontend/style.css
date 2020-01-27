@@ -24,6 +24,7 @@
 
 .content-1 {
   grid-area: content-1;
+  overflow-y: scroll;
 }
 
 .content-2 {
@@ -66,12 +67,28 @@ body {
   background-color: #FFF;
 }
 
+#table1 {
+  width: 80%;
+}
+
+#table2 {
+  width: 97%;
+}
+
 li {
     list-style-type: circle;
 }
 
 a {
   color: #00F;
+}
+
+/*table, th, td {
+  border: 1px solid black;
+}*/
+
+hr {
+  width: 25%;
 }
 
 a:link {

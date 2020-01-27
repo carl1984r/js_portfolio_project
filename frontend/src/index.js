@@ -20,16 +20,16 @@ function fetchClient(id) {
 
 function renderClient(json) {
   const td = document.querySelector('div.item.content-1 table tbody tr td')
-  const thead = document.querySelector('div.item.content-1 table thead')
+  const thead = document.querySelector('div.item.content-1 table#table2 caption')
   const hr = document.createElement('hr')
   thead.appendChild(hr)
 }
 
 function renderClients(json) {
-  const td = document.querySelector('div.item.sidebar table tbody tr td')
-  const thead = document.querySelector('div.item.sidebar table thead')
+  const td = document.querySelector('div.item.sidebar table#table1 tr td')
+  const caption = document.querySelector('div.item.sidebar table#table1 caption')
   const hr = document.createElement('hr')
-  thead.appendChild(hr)
+  caption.appendChild(hr)
   json.forEach(client => {
     let a = document.createElement('a')
     let li = document.createElement('li')
