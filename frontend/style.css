@@ -83,9 +83,9 @@ a {
   color: #00F;
 }
 
-/*table, th, td {
+table, th, td {
   border: 1px solid black;
-}*/
+}
 
 hr {
   width: 25%;
