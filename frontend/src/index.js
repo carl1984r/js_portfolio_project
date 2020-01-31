@@ -41,10 +41,6 @@ function renderClient(json) {
       let link1 = document.createTextNode(`${client_account["attributes"].account["utilization"]}`)
       let link2 = document.createTextNode(`${client_account["attributes"].account["number"]}`)
 
-      //for(let i = 0; i < 3; i++) {
-      //  let a + i = document.createElement('a')
-      //}
-
       let a0 = document.createElement('a')
       let a1 = document.createElement('a')
       let a2 = document.createElement('a')
@@ -66,12 +62,13 @@ function renderClient(json) {
       cell0.style.textAlign = "center"
       cell1.style.textAlign = "center"
       cell2.style.textAlign = "center"
-      
+
       //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
       //a.onclick = function() {fetchClient(`${client["id]"]}`)}
       //li.appendChild(a)
       //td.appendChild(li)
     })
+
   }
 
 function renderClients(json) {
@@ -86,7 +83,7 @@ function renderClients(json) {
     a.appendChild(link)
     //a.title = `${client.attributes}`
     //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
-    a.onclick = function() {fetchClient(`${client["id]"]}`)}
+    a.onclick = function() {fetchClient(`${client["id"]}`)}
     li.appendChild(a)
     td.appendChild(li)
   })
