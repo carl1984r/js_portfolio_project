@@ -21,10 +21,14 @@ function fetchClient(id) {
 function renderClient(json) {
   const caption = document.querySelector('div.item.content-1 table#table2 caption')
   const table = document.querySelector('div.item.content-1 table#table2 tbody')
+  const table2 = document.querySelector('div.item.content-2')
   const th = document.querySelectorAll("th")
-    th[0].textContent = "Account name"
-    th[1].textContent = "Utilization"
-    th[2].textContent = "Account number"
+
+  th[0].textContent = "Account name"
+  th[1].textContent = "Utilization"
+  th[2].textContent = "Account number"
+
+  table2.textContent = "Select an account to view Balance/Transaction history"
 
   let hr1 = document.createElement('hr')
     caption.textContent = "Client account(s)"
@@ -50,6 +54,8 @@ function renderClient(json) {
       a2.appendChild(link2)
 
       let row = table.insertRow(1)
+
+      row.href = "http://www.google.com/"
 
       let cell0 = row.insertCell(0)
       let cell1 = row.insertCell(1)
