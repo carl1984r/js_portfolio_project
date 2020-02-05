@@ -40,10 +40,10 @@ function renderClient(json) {
       th[i].appendChild(hr)
     }
 
-    json.data.slice().reverse().forEach(client_account => {
-      let link0 = document.createTextNode(`${client_account["attributes"].account["name"]}`)
-      let link1 = document.createTextNode(`${client_account["attributes"].account["utilization"]}`)
-      let link2 = document.createTextNode(`${client_account["attributes"].account["number"]}`)
+    json.included.slice().reverse().forEach(client_account => {
+      let link0 = document.createTextNode(`${client_account["attributes"]["name"]}`)
+      let link1 = document.createTextNode(`${client_account["attributes"]["utilization"]}`)
+      let link2 = document.createTextNode(`${client_account["attributes"]["number"]}`)
 
       let a0 = document.createElement('a')
       let a1 = document.createElement('a')
