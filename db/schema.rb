@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_084407) do
+ActiveRecord::Schema.define(version: 2020_02_06_104742) do
 
-  create_table "account_transactions", force: :cascade do |t|
+  create_table "account_transacts", force: :cascade do |t|
     t.integer "account_id"
-    t.integer "transaction_id"
+    t.integer "transact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_account_transactions_on_account_id"
-    t.index ["transaction_id"], name: "index_account_transactions_on_transaction_id"
+    t.index ["account_id"], name: "index_account_transacts_on_account_id"
+    t.index ["transact_id"], name: "index_account_transacts_on_transact_id"
   end
 
   create_table "accounts", force: :cascade do |t|
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2020_02_04_084407) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transacts", force: :cascade do |t|
     t.float "amount"
     t.string "description"
-    t.string "type"
+    t.string "transact_type"
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

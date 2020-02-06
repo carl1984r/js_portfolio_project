@@ -53,6 +53,8 @@ function renderClient(json) {
       a1.appendChild(link1)
       a2.appendChild(link2)
 
+      a0.href = `http://www.google.com`
+
       let row = table.insertRow(1)
 
       row.href = "http://www.google.com/"
