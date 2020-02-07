@@ -24,6 +24,11 @@ function renderClient(json) {
   const table2 = document.querySelector('div.item.content-2')
   const th = document.querySelectorAll("th")
 
+  let i
+    for (i = table.rows.length - 1; i > 0; i--) {
+      table.deleteRow(i)
+    }
+
   th[0].textContent = "Account name"
   th[1].textContent = "Utilization"
   th[2].textContent = "Account number"
