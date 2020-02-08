@@ -23,10 +23,10 @@ accounts = [
 ]
 
 trans = [
-  {amount: 15.64, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020" },
-  {amount: 2557.80, description: "US Treasury", transact_type: "credit", date: "03022020" },
-  {amount: 2451.15, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020" },
-  {amount: 5114.20, description: "UBS", transact_type: "credit", date: "01042020" },
+  {amount: 15.64, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020", run: 2000.00 },
+  {amount: 2557.80, description: "US Treasury", transact_type: "credit", date: "03022020", run: 4557.80  },
+  {amount: 2451.15, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020", run: 2106.65 },
+  {amount: 5114.20, description: "UBS", transact_type: "credit", date: "01042020", run: 7220.85 },
 ]
 
 accounts.each do |f|

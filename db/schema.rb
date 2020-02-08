@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_104742) do
+ActiveRecord::Schema.define(version: 2020_02_08_101022) do
 
   create_table "account_transacts", force: :cascade do |t|
     t.integer "account_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_104742) do
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "run"
   end
 
 end
