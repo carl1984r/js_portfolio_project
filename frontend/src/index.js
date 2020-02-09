@@ -2,6 +2,7 @@
 const BASE_URL = "http://localhost:3000";
 const CLIENTS_URL = `${BASE_URL}/clients`;
 const CLIENT_ACCOUNTS_URL = `${BASE_URL}/client_accounts`;
+const ACCOUNT_TRANSACTS_URL = `${BASE_URL}/account_transacts`;
 
 //$(document).ready(function() {
 //  console.log('Hello World');
@@ -13,12 +14,22 @@ function fetchClients() {
   fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json))
   }
 
-function fetchClient(id) {
+function fetchClientAccounts(id) {
   let url = `${CLIENT_ACCOUNTS_URL}/${id}`
-  fetch(url).then(resp => resp.json()).then(json => renderClient(json))
-  }
+  fetch(url).then(resp => resp.json()).then(json => renderClientAccounts(json))
+}
 
-function renderClient(json) {
+function fetchAccountTransacts(id) {
+  let url = `${ACCOUNT_TRANSACTS_URL}/${id}`
+  fetch(url).then(resp => resp.json()).then(json => renderAccountTransacts(json))
+}
+
+function renderAccountTransacts(json) {
+
+
+}
+
+function renderClientAccounts(json) {
   const caption = document.querySelector('div.item.content-1 table#table2 caption')
   const table = document.querySelector('div.item.content-1 table#table2 tbody')
   const table2 = document.querySelector('div.item.content-2')
@@ -58,7 +69,7 @@ function renderClient(json) {
       a1.appendChild(link1)
       a2.appendChild(link2)
 
-      a0.href = `http://www.google.com`
+      a0.href = `${ACCOUNT_TRANSACTS_URL}/${client_account.id}`
 
       let row = table.insertRow(1)
 
@@ -96,7 +107,7 @@ function renderClients(json) {
     a.appendChild(link)
     //a.title = `${client.attributes}`
     //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
-    a.onclick = function() {fetchClient(`${client["id"]}`)}
+    a.onclick = function() {fetchClientAccounts(`${client["id"]}`)}
     li.appendChild(a)
     td.appendChild(li)
   })
