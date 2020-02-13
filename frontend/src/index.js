@@ -4,12 +4,6 @@ const CLIENTS_URL = `${BASE_URL}/clients`;
 const CLIENT_ACCOUNTS_URL = `${BASE_URL}/client_accounts`;
 const ACCOUNT_TRANSACTS_URL = `${BASE_URL}/account_transacts`;
 
-//$(document).ready(function() {
-//  console.log('Hello World');
-//  fetch(CLIENTS_URL).then(resp => resp.json())
-//    .then(json => console.log(json));
-//});
-
 function fetchClients() {
   fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json))
   }
@@ -34,6 +28,8 @@ function renderAccountTransacts(json) {
     caption2.textContent = "Account Balance/Transaction history"
     caption2.appendChild(hr1)
 
+if (json.data.length > 0) {
+
   th[3].textContent = "Date"
   th[4].textContent = "Type"
   th[5].textContent = "Description"
@@ -46,7 +42,7 @@ function renderAccountTransacts(json) {
       th[i].appendChild(hr)
     }
 
-    json.included.slice().reverse().forEach(account_transacts => {
+    json.included.slice().forEach(account_transacts => {
       let text0 = document.createTextNode(`${account_transacts["attributes"]["date"]}`)
       let text1 = document.createTextNode(`${account_transacts["attributes"]["transact_type"]}`)
       let text2 = document.createTextNode(`${account_transacts["attributes"]["description"]}`)
@@ -73,15 +69,38 @@ function renderAccountTransacts(json) {
       cell3.style.textAlign = "center"
       cell4.style.textAlign = "center"
     })
+
+  } else {
+
+  let g
+    for (g = table.rows.length - 1; g > 0; g--) {
+      table.deleteRow(g)
+    }
+
+    for(let i = 3; i < 8; i++) {
+      th[i].textContent = ""
+    }
+
+    th[5].textContent = "No account activity"
+  }
 }
 
 function renderClientAccounts(json) {
   let table = document.querySelector('div.item.content-1 table#table2 tbody')
+  let table2 = document.querySelector('div.item.content-2 table#table3 tbody')
 
   let i
     for (i = table.rows.length - 1; i > 0; i--) {
       table.deleteRow(i)
     }
+  let g
+    for (g = table2.rows.length - 1; g > 0; g--) {
+      table2.deleteRow(g)
+    }
+
+  for(let i = 3; i < 8; i++) {
+    th[i].textContent = ""
+  }
 
   th[0].textContent = "Account name"
   th[1].textContent = "Utilization"
@@ -129,11 +148,6 @@ function renderClientAccounts(json) {
       cell0.style.textAlign = "center"
       cell1.style.textAlign = "center"
       cell2.style.textAlign = "center"
-
-      //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
-      //a.onclick = function() {fetchClient(`${client["id]"]}`)}
-      //li.appendChild(a)
-      //td.appendChild(li)
     })
 
   }
@@ -148,8 +162,6 @@ function renderClients(json) {
     let li = document.createElement('li')
     let link = document.createTextNode(`${client["attributes"]["name"]}`)
     a.appendChild(link)
-    //a.title = `${client.attributes}`
-    //a.href = `${CLIENT_ACCOUNTS_URL}/${client.id}`
     a.onclick = function() {fetchClientAccounts(`${client["id"]}`)}
     li.appendChild(a)
     td.appendChild(li)

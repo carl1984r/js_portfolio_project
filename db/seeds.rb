@@ -8,7 +8,9 @@
 
 clients = [
   [{name: "Don Morrissey", socialsec: "000000001", dob: "08082001", address: "807 W. 3rd St. Largo, FL 33771"}, {name: "Business Checking Account", number: "2082646", utilization: "checking"}],
-  [{name: "Su Morrissey", socialsec: "000000002", dob: "02252003", address: "807 W. 3rd St. Largo, FL 33771"}, {name: "Savings Acct.", number: "2082647", utilization: "savings"}]
+  [{name: "Su Morrissey", socialsec: "000000002", dob: "02252003", address: "807 W. 3rd St. Largo, FL 33771"}, {name: "Savings Acct.", number: "2082647", utilization: "savings"}],
+  [{name: "Lewis Mays", socialsec: "000000003", dob: "09/04/1998", address: "9154 19th St. Jacksonville, FL 32211"}, {name: "Biz Checking", number: "2082650", utilization: "checking"}],
+  [{name: "Tiff Braun", socialsec: "000000004", dob: "01/07/1991", address: "1556 N. 8th Pl. Pensacola, FL 32503"}, {name: "Savings Account", number: "2082651", utilization: "savings"}]
 ]
 
 clients.each do |f|
@@ -24,9 +26,9 @@ accounts = [
 
 trans = [
   {amount: 15.64, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020", run: 2000.00 },
-  {amount: 2557.80, description: "US Treasury", transact_type: "credit", date: "03022020", run: 4557.80  },
-  {amount: 2451.15, description: "Bill Pay - Visa", transact_type: "debit", date: "01042020", run: 2106.65 },
-  {amount: 5114.20, description: "UBS", transact_type: "credit", date: "01042020", run: 7220.85 },
+  {amount: 2557.80, description: "US Treasury", transact_type: "credit", date: "02022020", run: 4557.80  },
+  {amount: 2451.15, description: "Bill Pay - Visa", transact_type: "debit", date: "02082020", run: 2106.65 },
+  {amount: 5114.20, description: "UBS", transact_type: "credit", date: "03012020", run: 7220.85 }
 ]
 
 accounts.each do |f|
