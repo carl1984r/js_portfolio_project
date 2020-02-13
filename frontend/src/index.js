@@ -28,6 +28,8 @@ function renderAccountTransacts(json) {
     caption2.textContent = "Account Balance/Transaction history"
     caption2.appendChild(hr1)
 
+  table.className = 'fade-in'
+
 if (json.data.length > 0) {
 
   th[3].textContent = "Date"
@@ -89,6 +91,8 @@ function renderClientAccounts(json) {
   let table = document.querySelector('div.item.content-1 table#table2 tbody')
   let table2 = document.querySelector('div.item.content-2 table#table3 tbody')
 
+  table.className = 'fade-in'
+
   let i
     for (i = table.rows.length - 1; i > 0; i--) {
       table.deleteRow(i)
@@ -106,6 +110,7 @@ function renderClientAccounts(json) {
   th[1].textContent = "Utilization"
   th[2].textContent = "Account number"
 
+  caption2.className = 'fade-in'
   caption2.textContent = "Select an account to view Balance/Transaction history"
 
   let hr1 = document.createElement('hr')
@@ -137,6 +142,8 @@ function renderClientAccounts(json) {
 
       let row = table.insertRow(1)
 
+      row.className = 'uline'
+
       let cell0 = row.insertCell(0)
       let cell1 = row.insertCell(1)
       let cell2 = row.insertCell(2)
@@ -156,6 +163,9 @@ function renderClients(json) {
   const td = document.querySelector('div.item.sidebar table#table1 tr td')
   const caption = document.querySelector('div.item.sidebar table#table1 caption')
   const hr = document.createElement('hr')
+
+  td.className = 'fade-in'
+
   caption.appendChild(hr)
   json.data.forEach(client => {
     let a = document.createElement('a')
