@@ -25,10 +25,13 @@ const th = document.querySelectorAll("th")
 function renderAccountTransacts(json) {
   let table = document.querySelector('div.item.content-2 table#table3 tbody')
   let hr1 = document.createElement('hr')
+
     caption2.textContent = "Account Balance/Transaction history"
     caption2.appendChild(hr1)
 
-  table.className = 'fade-in'
+    table.classList.remove('fade-in')
+    void table.offsetWidth
+    table.classList.add('fade-in')
 
 if (json.data.length > 0) {
 
@@ -91,12 +94,15 @@ function renderClientAccounts(json) {
   let table = document.querySelector('div.item.content-1 table#table2 tbody')
   let table2 = document.querySelector('div.item.content-2 table#table3 tbody')
 
-  table.className = 'fade-in'
+  table.classList.remove('fade-in')
+  void table.offsetWidth
+  table.classList.add('fade-in')
 
   let i
     for (i = table.rows.length - 1; i > 0; i--) {
       table.deleteRow(i)
     }
+    
   let g
     for (g = table2.rows.length - 1; g > 0; g--) {
       table2.deleteRow(g)
