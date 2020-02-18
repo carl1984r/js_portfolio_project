@@ -20,6 +20,7 @@ function fetchAccountTransacts(id) {
 
 const caption1 = document.querySelector('div.item.content-1 table#table2 caption')
 const caption2 = document.querySelector('div.item.content-2 table#table3 caption')
+const footer = document.querySelector('div.item.footer')
 const th = document.querySelectorAll("th")
 
 function renderAccountTransacts(json) {
@@ -75,6 +76,75 @@ if (json.data.length > 0) {
       cell4.style.textAlign = "center"
     })
 
+    let form = document.createElement('form')
+    form.setAttribute("action", "")
+    form.setAttribute("method", "post")
+    footer.appendChild(form)
+
+    form.classList.remove('fade-in')
+    void form.offsetWidth
+    form.classList.add('fade-in')
+
+    let span0 = document.createElement('span')
+    let hr2 = document.createElement('hr')
+    span0.textContent = "Account Deposit/Withdrawal"
+    span0.appendChild(hr2)
+    form.appendChild(span0)
+
+    let div = document.createElement('div')
+    let transactionlabel = document.createElement('label')
+    let descriptionlabel = document.createElement('label')
+    let amountlabel = document.createElement('label')
+    let divider0 = document.createElement('label')
+    let divider1 = document.createElement('label')
+    let divider2 = document.createElement('label')
+    let transactionselection = document.createElement('select')
+    let option0 = document.createElement('option')
+    let option1 = document.createElement('option')
+    let optionlabel0 = document.createTextNode("Credit")
+    let optionlabel1 = document.createTextNode("Debit")
+    let input0 = document.createElement("input")
+    let input1 = document.createElement("input")
+    let submit = document.createElement("input")
+
+    transactionlabel.setAttribute("class", "label")
+    descriptionlabel.setAttribute("class", "label")
+    amountlabel.setAttribute("class", "label")
+    divider0.setAttribute("class", "divider")
+    divider1.setAttribute("class", "divider")
+    divider2.setAttribute("id", "divider")
+
+    input0.setAttribute("type", "text")
+    input1.setAttribute("type", "text")
+    submit.setAttribute("type", "button")
+    submit.setAttribute("value", "Submit")
+
+    option0.appendChild(optionlabel0)
+    option1.appendChild(optionlabel1)
+    option0.setAttribute("value", "credit")
+    option1.setAttribute("value", "debit")
+
+    transactionselection.appendChild(option0)
+    transactionselection.appendChild(option1)
+    div.setAttribute("id", "div1")
+    transactionlabel.innerHTML = "Transation Type:"
+    descriptionlabel.innerHTML = "Description:"
+    amountlabel.innerHTML = "Amount:"
+    divider0.innerHTML = "|"
+    divider1.innerHTML = "|"
+    divider2.innerHTML = "|"
+    div.appendChild(transactionlabel)
+    div.appendChild(transactionselection)
+    div.appendChild(divider0)
+    div.appendChild(descriptionlabel)
+    div.appendChild(input0)
+    div.appendChild(divider1)
+    div.appendChild(amountlabel)
+    div.appendChild(input1)
+    div.appendChild(divider2)
+    div.appendChild(submit)
+    form.appendChild(div)
+
   } else {
 
   let g
@@ -102,7 +172,7 @@ function renderClientAccounts(json) {
     for (i = table.rows.length - 1; i > 0; i--) {
       table.deleteRow(i)
     }
-    
+
   let g
     for (g = table2.rows.length - 1; g > 0; g--) {
       table2.deleteRow(g)

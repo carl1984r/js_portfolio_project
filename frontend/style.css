@@ -83,6 +83,33 @@ body {
   border-collapse: collapse;
 }
 
+#div1 {
+  text-align: left;
+}
+
+form {
+  width: 100%;
+}
+
+#divider {
+  padding-left: 35px;
+  padding-right: 30px;
+}
+
+.divider {
+  padding-left: 35px;
+  padding-right: 15px;
+}
+
+.label {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.item.footer {
+  text-align: center;
+}
+
 li {
   list-style-type: none;
   text-align: center;
@@ -92,9 +119,9 @@ a {
   color: #00F;
 }
 
-/*th, td {
-   border: 1px solid #ddd;
-}*/
+th, td {
+   border: 1px solid #000;
+}
 
 #table1 li:nth-child(odd) {
   background-color: #f2f2f2;
