@@ -32,10 +32,6 @@
   overflow-y: scroll;
 }
 
-/*.content-3 {
-  grid-area: content-3;
-}*/
-
 .footer {
   grid-area: footer;
   grid-row: 4 / 5;
@@ -83,10 +79,6 @@ body {
   border-collapse: collapse;
 }
 
-#div1 {
-  text-align: left;
-}
-
 form {
   width: 100%;
 }
@@ -98,6 +90,10 @@ form {
 
 .divider {
   padding-left: 35px;
+  padding-right: 15px;
+}
+
+#label {
   padding-right: 15px;
 }
 
@@ -119,9 +115,9 @@ a {
   color: #00F;
 }
 
-th, td {
+/*th, td {
    border: 1px solid #000;
-}
+}*/
 
 #table1 li:nth-child(odd) {
   background-color: #f2f2f2;

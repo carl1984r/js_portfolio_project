@@ -107,7 +107,7 @@ if (json.data.length > 0) {
     let input1 = document.createElement("input")
     let submit = document.createElement("input")
 
-    transactionlabel.setAttribute("class", "label")
+    transactionlabel.setAttribute("id", "label")
     descriptionlabel.setAttribute("class", "label")
     amountlabel.setAttribute("class", "label")
     divider0.setAttribute("class", "divider")
@@ -115,8 +115,11 @@ if (json.data.length > 0) {
     divider2.setAttribute("id", "divider")
 
     input0.setAttribute("type", "text")
+    input0.setAttribute("id", "description")
     input1.setAttribute("type", "text")
+    input1.setAttribute("id", "amount")
     submit.setAttribute("type", "button")
+    submit.setAttribute("onclick", "submitEvent()")
     submit.setAttribute("value", "Submit")
 
     option0.appendChild(optionlabel0)
@@ -126,8 +129,7 @@ if (json.data.length > 0) {
 
     transactionselection.appendChild(option0)
     transactionselection.appendChild(option1)
-    div.setAttribute("id", "div1")
-    transactionlabel.innerHTML = "Transation Type:"
+    transactionlabel.innerHTML = "Transaction Type:"
     descriptionlabel.innerHTML = "Description:"
     amountlabel.innerHTML = "Amount:"
     divider0.innerHTML = "|"
@@ -157,6 +159,23 @@ if (json.data.length > 0) {
     }
 
     th[5].textContent = "No account activity"
+  }
+}
+
+function submitEvent() {
+  let description = document.getElementById("description").value
+  let amount = document.getElementById("amount").value
+  let amountReg = /^\$?\d+(,\d{3})*(\.\d*)?$/
+  let pointNum = parseFloat(amount)
+
+  if (description != '' && amount != '') {
+    if (amountReg.test(amount) && pointNum > 0) {
+      alert("Account updated")
+    } else {
+      alert("Please input a valid amount")
+    }
+  } else {
+    alert("Account Deposit/Withdrawal form must be fully completed")
   }
 }
 
