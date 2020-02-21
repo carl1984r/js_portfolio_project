@@ -1,8 +1,10 @@
 
 const BASE_URL = "http://localhost:3000";
 const CLIENTS_URL = `${BASE_URL}/clients`;
+const ACCOUNTS_URL = `${BASE_URL}/accounts`;
 const CLIENT_ACCOUNTS_URL = `${BASE_URL}/client_accounts`;
 const ACCOUNT_TRANSACTS_URL = `${BASE_URL}/account_transacts`;
+
 
 function fetchClients() {
   fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json))
@@ -35,6 +37,11 @@ function renderAccountTransacts(json) {
     table.classList.add('fade-in')
 
 if (json.data.length > 0) {
+
+  let g
+    for (g = table.rows.length - 1; g > 0; g--) {
+      table.deleteRow(g)
+    }
 
   th[3].textContent = "Date"
   th[4].textContent = "Type"
@@ -77,8 +84,9 @@ if (json.data.length > 0) {
     })
 
     let form = document.createElement('form')
-    form.setAttribute("action", "")
-    form.setAttribute("method", "post")
+
+    form.setAttribute("id", `${json.included[0]["id"]}`)
+
     footer.appendChild(form)
 
     form.classList.remove('fade-in')
@@ -147,7 +155,15 @@ if (json.data.length > 0) {
     div.appendChild(submit)
     form.appendChild(div)
 
+    let form0 = document.getElementsByTagName("form")
+
+    if (form0.length > 1) {
+      form0[1].remove();
+    }
+
   } else {
+
+  let form = document.getElementsByTagName("form")
 
   let g
     for (g = table.rows.length - 1; g > 0; g--) {
@@ -159,17 +175,45 @@ if (json.data.length > 0) {
     }
 
     th[5].textContent = "No account activity"
+
+    if (th[5].textContent == "No account activity") {
+      form[0].remove();
+
+    }
+  }
+}
+
+class Transaction {
+  constructor(description, amount, id, transact_type, running_balance) {
+    this.description = description;
+    this.amount = amount;
+    this.id = id;
+    this.transact_type = transact_type;
+    this.running_balance = running_balance;
   }
 }
 
 function submitEvent() {
   let description = document.getElementById("description").value
-  let amount = document.getElementById("amount").value
+  let amount = parseFloat(document.getElementById("amount").value)
   let amountReg = /^\$?\d+(,\d{3})*(\.\d*)?$/
   let pointNum = parseFloat(amount)
+  let id = document.getElementsByTagName("form")[0].id
+  let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
+  let run = parseFloat(document.getElementsByTagName("td")[14].textContent)
+  let running_balance = run + amount
 
   if (description != '' && amount != '') {
     if (amountReg.test(amount) && pointNum > 0) {
+      let trans = new Transaction(description, amount, id, transact_type, running_balance)
+
+      fetch(ACCOUNTS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(trans),
+      })
       alert("Account updated")
     } else {
       alert("Please input a valid amount")
