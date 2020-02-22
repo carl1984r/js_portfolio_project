@@ -196,16 +196,16 @@ class Transaction {
 
 function submitEvent() {
   let description = document.getElementById("description").value
-  let amount = parseFloat(document.getElementById("amount").value)
-  let amountReg = /^\$?\d+(,\d{3})*(\.\d*)?$/
-  let pointNum = parseFloat(amount)
+  let amount = parseFloat((document.getElementById("amount").value).replace(/,/g, ""))
+  let amountReg = /^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/
   let id = document.getElementsByTagName("form")[0].id
   let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
   let run = parseFloat(document.getElementsByTagName("td")[14].textContent)
-  let running_balance = run + amount
+  let pre_balance = run + amount
+  let running_balance = Math.ceil(pre_balance * 100)/100
 
   if (description != '' && amount != '') {
-    if (amountReg.test(amount) && pointNum > 0) {
+    if (amountReg.test(amount) && amount > 0) {
       let trans = new Transaction(description, amount, id, transact_type, running_balance)
 
       fetch(ACCOUNTS_URL, {
