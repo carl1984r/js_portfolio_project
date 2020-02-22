@@ -216,6 +216,7 @@ function submitEvent() {
         body: JSON.stringify(trans),
       })
       alert("Account updated")
+      fetchAccountTransacts(id)
     } else {
       alert("Please input a valid amount")
     }
