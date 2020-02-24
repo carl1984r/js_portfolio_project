@@ -56,31 +56,22 @@ if (json.data.length > 0) {
     }
 
     json.included.slice().forEach(account_transacts => {
-      let text0 = document.createTextNode(`${account_transacts["attributes"]["date"]}`)
-      let text1 = document.createTextNode(`${account_transacts["attributes"]["transact_type"]}`)
-      let text2 = document.createTextNode(`${account_transacts["attributes"]["description"]}`)
-      let text3 = document.createTextNode(`${account_transacts["attributes"]["amount"]}`)
-      let text4 = document.createTextNode(`${account_transacts["attributes"]["run"]}`)
+      let data = ["date", "transact_type", "description", "amount", "run"]
+      let text = []
+
+        for (let i = 0; i <= 4; ++i) {
+          text[i] = document.createTextNode(`${account_transacts["attributes"][data[i]]}`)
+        }
 
       let row = table.insertRow(1)
 
-      let cell0 = row.insertCell(0)
-      let cell1 = row.insertCell(1)
-      let cell2 = row.insertCell(2)
-      let cell3 = row.insertCell(3)
-      let cell4 = row.insertCell(4)
+      let cell = []
 
-      cell0.appendChild(text0)
-      cell1.appendChild(text1)
-      cell2.appendChild(text2)
-      cell3.appendChild(text3)
-      cell4.appendChild(text4)
-
-      cell0.style.textAlign = "center"
-      cell1.style.textAlign = "center"
-      cell2.style.textAlign = "center"
-      cell3.style.textAlign = "center"
-      cell4.style.textAlign = "center"
+        for (let i = 0; i <= 4; ++i) {
+          cell[i] = row.insertCell(i)
+          cell[i].appendChild(text[i])
+          cell[i].style.textAlign = "center"
+        }
     })
 
     let row = document.getElementsByTagName("tr")
@@ -229,9 +220,9 @@ function renderClientAccounts(json) {
   let table = document.querySelector('div.item.content-1 table#table2 tbody')
   let table2 = document.querySelector('div.item.content-2 table#table3 tbody')
 
-  table.classList.remove('fade-in')
-  void table.offsetWidth
-  table.classList.add('fade-in')
+    table.classList.remove('fade-in')
+    void table.offsetWidth
+    table.classList.add('fade-in')
 
   let i
     for (i = table.rows.length - 1; i > 0; i--) {
@@ -247,12 +238,12 @@ function renderClientAccounts(json) {
     th[i].textContent = ""
   }
 
-  th[0].textContent = "Account name"
-  th[1].textContent = "Utilization"
-  th[2].textContent = "Account number"
+    th[0].textContent = "Account name"
+    th[1].textContent = "Utilization"
+    th[2].textContent = "Account number"
 
-  caption2.className = 'fade-in'
-  caption2.textContent = "Select an account to view Balance/Transaction history"
+    caption2.className = 'fade-in'
+    caption2.textContent = "Select an account to view Balance/Transaction history"
 
   let hr1 = document.createElement('hr')
     caption1.textContent = "Client account(s)"
@@ -264,41 +255,34 @@ function renderClientAccounts(json) {
       th[i].appendChild(hr)
     }
 
-    json.included.slice().reverse().forEach(client_account => {
-      let link0 = document.createTextNode(`${client_account["attributes"]["name"]}`)
-      let link1 = document.createTextNode(`${client_account["attributes"]["utilization"]}`)
-      let link2 = document.createTextNode(`${client_account["attributes"]["number"]}`)
+  json.included.slice().reverse().forEach(client_account => {
+    let data = ["name", "utilization", "number"]
+    let link = []
 
-      let a0 = document.createElement('a')
-      let a1 = document.createElement('a')
-      let a2 = document.createElement('a')
+      for (let i = 0; i <= 2; ++i) {
+        link[i] = document.createTextNode(`${client_account["attributes"][data[i]]}`)
+      }
 
-      a0.appendChild(link0)
-      a1.appendChild(link1)
-      a2.appendChild(link2)
+    let a = []
 
-      a0.onclick = function() {fetchAccountTransacts(`${client_account["id"]}`)}
-      a1.onclick = function() {fetchAccountTransacts(`${client_account["id"]}`)}
-      a2.onclick = function() {fetchAccountTransacts(`${client_account["id"]}`)}
+      for (let i = 0; i <= 2; ++i) {
+        a[i] = document.createElement('a')
+        a[i].appendChild(link[i])
+        a[i].onclick = function() {fetchAccountTransacts(`${client_account["id"]}`)}
+      }
 
-      let row = table.insertRow(1)
+  let row = table.insertRow(1)
+    row.className = 'uline'
 
-      row.className = 'uline'
+  let cell = []
 
-      let cell0 = row.insertCell(0)
-      let cell1 = row.insertCell(1)
-      let cell2 = row.insertCell(2)
-
-      cell0.appendChild(a0)
-      cell1.appendChild(a1)
-      cell2.appendChild(a2)
-
-      cell0.style.textAlign = "center"
-      cell1.style.textAlign = "center"
-      cell2.style.textAlign = "center"
-    })
-
-  }
+    for (let i = 0; i <= 2; ++i) {
+      cell[i] = row.insertCell(i)
+      cell[i].appendChild(a[i])
+      cell[i].style.textAlign = "center"
+    }
+  })
+}
 
 function renderClients(json) {
   const td = document.querySelector('div.item.sidebar table#table1 tr td')
