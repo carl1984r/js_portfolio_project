@@ -103,6 +103,7 @@ if (json.data.length > 0) {
     let option1 = document.createElement('option')
     let optionlabel0 = document.createTextNode("Credit")
     let optionlabel1 = document.createTextNode("Debit")
+    let hidden0 = document.createElement("input")
     let input0 = document.createElement("input")
     let input1 = document.createElement("input")
     let submit = document.createElement("input")
@@ -114,6 +115,8 @@ if (json.data.length > 0) {
       divider1.setAttribute("class", "divider")
       divider2.setAttribute("id", "divider")
 
+      hidden0.setAttribute("type", "hidden")
+      hidden0.setAttribute("id", "hidden0")
       input0.setAttribute("type", "text")
       input0.setAttribute("id", "description")
       input1.setAttribute("type", "text")
@@ -129,12 +132,14 @@ if (json.data.length > 0) {
 
       transactionselection.appendChild(option0)
       transactionselection.appendChild(option1)
+      hidden0.value = `${json.included[json.included.length-1].attributes.run}`
       transactionlabel.innerHTML = "Transaction Type:"
       descriptionlabel.innerHTML = "Description:"
       amountlabel.innerHTML = "Amount:"
       divider0.innerHTML = "|"
       divider1.innerHTML = "|"
       divider2.innerHTML = "|"
+      div.appendChild(hidden0)
       div.appendChild(transactionlabel)
       div.appendChild(transactionselection)
       div.appendChild(divider0)
@@ -150,7 +155,7 @@ if (json.data.length > 0) {
     let form0 = document.getElementsByTagName("form")
 
     if (form0.length > 1) {
-      form0[1].remove();
+      form0[0].remove();
     }
 
   } else {
@@ -191,7 +196,7 @@ function submitEvent() {
   let amountReg = /^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/
   let id = document.getElementsByTagName("form")[0].id
   let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
-  let running_balance = parseFloat(document.getElementsByTagName("td")[14].textContent)
+  let running_balance = parseFloat(document.getElementById("hidden0").value)
 
   if (description != '' && amount != '') {
     if (amountReg.test(amount) && amount > 0) {
