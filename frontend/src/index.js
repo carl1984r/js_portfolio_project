@@ -191,9 +191,7 @@ function submitEvent() {
   let amountReg = /^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/
   let id = document.getElementsByTagName("form")[0].id
   let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
-  let run = parseFloat(document.getElementsByTagName("td")[14].textContent)
-  let pre_balance = run + amount
-  let running_balance = Math.ceil(pre_balance * 100)/100
+  let running_balance = parseFloat(document.getElementsByTagName("td")[14].textContent)
 
   if (description != '' && amount != '') {
     if (amountReg.test(amount) && amount > 0) {
