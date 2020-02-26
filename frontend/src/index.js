@@ -92,10 +92,19 @@ if (json.data.length > 0) {
         form.appendChild(span0)
 
     let div = document.createElement('div')
-    let transactionlabel = document.createElement('label')
-    let descriptionlabel = document.createElement('label')
-    let amountlabel = document.createElement('label')
     let transactionselection = document.createElement('select')
+
+    let amountlabel = document.createElement('label')
+        amountlabel.setAttribute("class", "label")
+        amountlabel.innerHTML = "Amount:"
+
+    let descriptionlabel = document.createElement('label')
+        descriptionlabel.setAttribute("class", "label")
+        descriptionlabel.innerHTML = "Description:"
+
+    let transactionlabel = document.createElement('label')
+        transactionlabel.setAttribute("id", "label")
+        transactionlabel.innerHTML = "Transaction Type:"
 
     let divider = []
 
@@ -104,13 +113,16 @@ if (json.data.length > 0) {
         divider[i].innerHTML = "|"
       }
 
+        divider[0].setAttribute("class", "divider")
+        divider[1].setAttribute("class", "divider")
+        divider[2].setAttribute("id", "divider")
+
     let input = []
     let inputattributedata = ["description", "amount"]
     let option = []
     let optionlabel = []
     let optionlabeldata = ["Credit", "Debit"]
     let optionattributedata = ["credit", "debit"]
-
 
       for (let i = 0; i <= 1; ++i) {
         input[i] = document.createElement("input")
@@ -126,38 +138,25 @@ if (json.data.length > 0) {
     let hidden0 = document.createElement("input")
         hidden0.setAttribute("type", "hidden")
         hidden0.setAttribute("id", "hidden0")
+        hidden0.value = `${json.included[json.included.length-1].attributes.run}`
 
     let submit = document.createElement("input")
         submit.setAttribute("type", "button")
         submit.setAttribute("onclick", "submitEvent()")
         submit.setAttribute("value", "Submit")
 
-      transactionlabel.setAttribute("id", "label")
-      descriptionlabel.setAttribute("class", "label")
-      amountlabel.setAttribute("class", "label")
-      divider[0].setAttribute("class", "divider")
-      divider[1].setAttribute("class", "divider")
-      divider[2].setAttribute("id", "divider")
-
-
-
-      hidden0.value = `${json.included[json.included.length-1].attributes.run}`
-      transactionlabel.innerHTML = "Transaction Type:"
-      descriptionlabel.innerHTML = "Description:"
-      amountlabel.innerHTML = "Amount:"
-
-      div.appendChild(hidden0)
-      div.appendChild(transactionlabel)
-      div.appendChild(transactionselection)
-      div.appendChild(divider[0])
-      div.appendChild(descriptionlabel)
-      div.appendChild(input[0])
-      div.appendChild(divider[1])
-      div.appendChild(amountlabel)
-      div.appendChild(input[1])
-      div.appendChild(divider[2])
-      div.appendChild(submit)
-      form.appendChild(div)
+        div.appendChild(hidden0)
+        div.appendChild(transactionlabel)
+        div.appendChild(transactionselection)
+        div.appendChild(divider[0])
+        div.appendChild(descriptionlabel)
+        div.appendChild(input[0])
+        div.appendChild(divider[1])
+        div.appendChild(amountlabel)
+        div.appendChild(input[1])
+        div.appendChild(divider[2])
+        div.appendChild(submit)
+        form.appendChild(div)
 
     let form0 = document.getElementsByTagName("form")
 
