@@ -75,80 +75,87 @@ if (json.data.length > 0) {
     })
 
     let row = document.getElementsByTagName("tr")
-      row[row.length-1].remove();
+        row[row.length-1].remove()
 
     let form = document.createElement('form')
-      form.setAttribute("id", `${json.included[0]["id"]}`)
-      footer.appendChild(form)
+        form.setAttribute("id", `${json.included[0]["id"]}`)
+        footer.appendChild(form)
 
-      form.classList.remove('fade-in')
-      void form.offsetWidth
-      form.classList.add('fade-in')
+        form.classList.remove('fade-in')
+        void form.offsetWidth
+        form.classList.add('fade-in')
 
     let span0 = document.createElement('span')
     let hr2 = document.createElement('hr')
-      span0.textContent = "Account Deposit/Withdrawal"
-      span0.appendChild(hr2)
-      form.appendChild(span0)
+        span0.textContent = "Account Deposit/Withdrawal"
+        span0.appendChild(hr2)
+        form.appendChild(span0)
 
     let div = document.createElement('div')
     let transactionlabel = document.createElement('label')
     let descriptionlabel = document.createElement('label')
     let amountlabel = document.createElement('label')
-    let divider0 = document.createElement('label')
-    let divider1 = document.createElement('label')
-    let divider2 = document.createElement('label')
     let transactionselection = document.createElement('select')
-    let option0 = document.createElement('option')
-    let option1 = document.createElement('option')
-    let optionlabel0 = document.createTextNode("Credit")
-    let optionlabel1 = document.createTextNode("Debit")
+
+    let divider = []
+
+      for (let i = 0; i <= 2; ++i) {
+        divider[i] = document.createElement('label')
+        divider[i].innerHTML = "|"
+      }
+
+    let input = []
+    let inputattributedata = ["description", "amount"]
+    let option = []
+    let optionlabel = []
+    let optionlabeldata = ["Credit", "Debit"]
+    let optionattributedata = ["credit", "debit"]
+
+
+      for (let i = 0; i <= 1; ++i) {
+        input[i] = document.createElement("input")
+        input[i].setAttribute("type", "text")
+        input[i].setAttribute("id", inputattributedata[i])
+        option[i] = document.createElement('option')
+        optionlabel[i] = document.createTextNode(optionlabeldata[i])
+        option[i].appendChild(optionlabel[i])
+        transactionselection.appendChild(option[i])
+        option[i].setAttribute("value", optionattributedata[i])
+      }
+
     let hidden0 = document.createElement("input")
-    let input0 = document.createElement("input")
-    let input1 = document.createElement("input")
+        hidden0.setAttribute("type", "hidden")
+        hidden0.setAttribute("id", "hidden0")
+
     let submit = document.createElement("input")
+        submit.setAttribute("type", "button")
+        submit.setAttribute("onclick", "submitEvent()")
+        submit.setAttribute("value", "Submit")
 
       transactionlabel.setAttribute("id", "label")
       descriptionlabel.setAttribute("class", "label")
       amountlabel.setAttribute("class", "label")
-      divider0.setAttribute("class", "divider")
-      divider1.setAttribute("class", "divider")
-      divider2.setAttribute("id", "divider")
+      divider[0].setAttribute("class", "divider")
+      divider[1].setAttribute("class", "divider")
+      divider[2].setAttribute("id", "divider")
 
-      hidden0.setAttribute("type", "hidden")
-      hidden0.setAttribute("id", "hidden0")
-      input0.setAttribute("type", "text")
-      input0.setAttribute("id", "description")
-      input1.setAttribute("type", "text")
-      input1.setAttribute("id", "amount")
-      submit.setAttribute("type", "button")
-      submit.setAttribute("onclick", "submitEvent()")
-      submit.setAttribute("value", "Submit")
 
-      option0.appendChild(optionlabel0)
-      option1.appendChild(optionlabel1)
-      option0.setAttribute("value", "credit")
-      option1.setAttribute("value", "debit")
 
-      transactionselection.appendChild(option0)
-      transactionselection.appendChild(option1)
       hidden0.value = `${json.included[json.included.length-1].attributes.run}`
       transactionlabel.innerHTML = "Transaction Type:"
       descriptionlabel.innerHTML = "Description:"
       amountlabel.innerHTML = "Amount:"
-      divider0.innerHTML = "|"
-      divider1.innerHTML = "|"
-      divider2.innerHTML = "|"
+
       div.appendChild(hidden0)
       div.appendChild(transactionlabel)
       div.appendChild(transactionselection)
-      div.appendChild(divider0)
+      div.appendChild(divider[0])
       div.appendChild(descriptionlabel)
-      div.appendChild(input0)
-      div.appendChild(divider1)
+      div.appendChild(input[0])
+      div.appendChild(divider[1])
       div.appendChild(amountlabel)
-      div.appendChild(input1)
-      div.appendChild(divider2)
+      div.appendChild(input[1])
+      div.appendChild(divider[2])
       div.appendChild(submit)
       form.appendChild(div)
 
