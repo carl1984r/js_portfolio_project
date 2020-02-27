@@ -43,15 +43,11 @@ if (json.data.length > 0) {
       table.deleteRow(g)
     }
 
-    th[3].textContent = "Date"
-    th[4].textContent = "Type"
-    th[5].textContent = "Description"
-    th[6].textContent = "Amount"
-    th[7].textContent = "Balance"
-
   let hr
+  let hrtextcontent = ["Date", "Type", "Description", "Amount", "Balance"]
     for(let i = 3; i < 8; i++) {
       hr = document.createElement('hr')
+      th[i].textContent = hrtextcontent[i-3]
       th[i].appendChild(hr)
     }
 
@@ -173,14 +169,9 @@ if (json.data.length > 0) {
     th[5].textContent = "No account activity"
 
     if (th[5].textContent == "No account activity") {
-      form[0].remove();
-
+      form[0].remove()
     }
   }
-}
-
-function buildaccountform() {
-
 }
 
 class Transaction {
