@@ -56,22 +56,22 @@ if (json.data.length > 0) {
     }
 
     json.included.slice().forEach(account_transacts => {
-      let data = ["date", "transact_type", "description", "amount", "run"]
-      let text = []
+    let data = ["date", "transact_type", "description", "amount", "run"]
+    let text = []
 
-        for (let i = 0; i <= 4; ++i) {
-          text[i] = document.createTextNode(`${account_transacts["attributes"][data[i]]}`)
-        }
+      for (let i = 0; i <= 4; ++i) {
+        text[i] = document.createTextNode(`${account_transacts["attributes"][data[i]]}`)
+      }
 
-      let row = table.insertRow(1)
+    let row = table.insertRow(1)
 
-      let cell = []
+    let cell = []
 
-        for (let i = 0; i <= 4; ++i) {
-          cell[i] = row.insertCell(i)
-          cell[i].appendChild(text[i])
-          cell[i].style.textAlign = "center"
-        }
+      for (let i = 0; i <= 4; ++i) {
+        cell[i] = row.insertCell(i)
+        cell[i].appendChild(text[i])
+        cell[i].style.textAlign = "center"
+      }
     })
 
     let row = document.getElementsByTagName("tr")
@@ -107,15 +107,13 @@ if (json.data.length > 0) {
         transactionlabel.innerHTML = "Transaction Type:"
 
     let divider = []
+    let dividerattributes = ["class", "divider", "class", "divider", "id", "divider"]
 
       for (let i = 0; i <= 2; ++i) {
         divider[i] = document.createElement('label')
         divider[i].innerHTML = "|"
+        divider[i].setAttribute(dividerattributes[i+i], dividerattributes[i+i+1])
       }
-
-        divider[0].setAttribute("class", "divider")
-        divider[1].setAttribute("class", "divider")
-        divider[2].setAttribute("id", "divider")
 
     let input = []
     let inputattributedata = ["description", "amount"]
@@ -145,17 +143,12 @@ if (json.data.length > 0) {
         submit.setAttribute("onclick", "submitEvent()")
         submit.setAttribute("value", "Submit")
 
-        div.appendChild(hidden0)
-        div.appendChild(transactionlabel)
-        div.appendChild(transactionselection)
-        div.appendChild(divider[0])
-        div.appendChild(descriptionlabel)
-        div.appendChild(input[0])
-        div.appendChild(divider[1])
-        div.appendChild(amountlabel)
-        div.appendChild(input[1])
-        div.appendChild(divider[2])
-        div.appendChild(submit)
+    let divdata = [hidden0, transactionlabel, transactionselection, divider[0], descriptionlabel, input[0], divider[1], amountlabel, input[1], divider[2], submit]
+
+      for (let i = 0; i <= 10; ++i) {
+        div.appendChild(divdata[i])
+      }
+
         form.appendChild(div)
 
     let form0 = document.getElementsByTagName("form")
@@ -184,6 +177,10 @@ if (json.data.length > 0) {
 
     }
   }
+}
+
+function buildaccountform() {
+
 }
 
 class Transaction {
@@ -281,7 +278,7 @@ function renderClientAccounts(json) {
       }
 
   let row = table.insertRow(1)
-    row.className = 'uline'
+      row.className = 'uline'
 
   let cell = []
 
