@@ -174,7 +174,7 @@ if (json.data.length > 0) {
   }
 }
 
-class Transaction {
+class AccountTransaction {
   constructor(description, amount, id, transact_type, running_balance) {
     this.description = description;
     this.amount = amount;
@@ -194,14 +194,14 @@ function submitEvent() {
 
   if (description != '' && amount != '') {
     if (amountReg.test(amount) && amount > 0) {
-      let trans = new Transaction(description, amount, id, transact_type, running_balance)
+      let account_transaction = new AccountTransaction(description, amount, id, transact_type, running_balance)
 
       fetch(ACCOUNTS_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(trans),
+        body: JSON.stringify(account_transaction),
       })
       alert("Account updated")
       fetchAccountTransacts(id)
@@ -281,6 +281,13 @@ function renderClientAccounts(json) {
   })
 }
 
+class Client {
+  constructor(name, id) {
+    this.name = name
+    this.id = id
+  }
+}
+
 function renderClients(json) {
   const td = document.querySelector('div.item.sidebar table#table1 tr td')
   const caption = document.querySelector('div.item.sidebar table#table1 caption')
@@ -290,13 +297,14 @@ function renderClients(json) {
 
   caption.appendChild(hr)
   json.data.forEach(client => {
+    let a_client = new Client(client["attributes"]["name"], client["id"])
+    let name = document.createTextNode(`${a_client.name}`)
     let a = document.createElement('a')
+        a.onclick = function() {fetchClientAccounts(`${a_client.id}`)}
+        a.appendChild(name)
     let li = document.createElement('li')
-    let link = document.createTextNode(`${client["attributes"]["name"]}`)
-    a.appendChild(link)
-    a.onclick = function() {fetchClientAccounts(`${client["id"]}`)}
-    li.appendChild(a)
-    td.appendChild(li)
+        li.appendChild(a)
+        td.appendChild(li)
   })
 }
 
