@@ -235,9 +235,11 @@ function renderClientAccounts(json) {
     th[i].textContent = ""
   }
 
-    th[0].textContent = "Account name"
-    th[1].textContent = "Utilization"
-    th[2].textContent = "Account number"
+  th_data = ["Account name", "Utilization", "Account number"]
+
+    for (let i = 0; i <= 2; ++i) {
+      th[i].textContent = th_data[i]
+    }
 
     caption2.className = 'fade-in'
     caption2.textContent = "Select an account to view Balance/Transaction history"
