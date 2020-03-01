@@ -213,6 +213,15 @@ function submitEvent() {
   }
 }
 
+class ClientAccount {
+  constructor(name, utilization, number, id) {
+    this.name = name
+    this.utilization = utilization
+    this.number = number
+    this.id = id
+  }
+}
+
 function renderClientAccounts(json) {
   let table = document.querySelector('div.item.content-1 table#table2 tbody')
   let table2 = document.querySelector('div.item.content-2 table#table3 tbody')
@@ -249,37 +258,35 @@ function renderClientAccounts(json) {
     caption1.appendChild(hr1)
 
   let hr
+
     for(let i = 0; i < 3; i++) {
       hr = document.createElement('hr')
       th[i].appendChild(hr)
     }
 
   json.included.slice().reverse().forEach(client_account => {
+    let a_client_account = new ClientAccount(client_account["attributes"]["name"], client_account["attributes"]["utilization"], client_account["attributes"]["number"], client_account["id"])
     let data = ["name", "utilization", "number"]
     let link = []
-
-      for (let i = 0; i <= 2; ++i) {
-        link[i] = document.createTextNode(`${client_account["attributes"][data[i]]}`)
-      }
-
     let a = []
 
       for (let i = 0; i <= 2; ++i) {
+        link[i] = document.createTextNode(`${a_client_account[data[i]]}`)
         a[i] = document.createElement('a')
         a[i].appendChild(link[i])
-        a[i].onclick = function() {fetchAccountTransacts(`${client_account["id"]}`)}
+        a[i].onclick = function() {fetchAccountTransacts(`${a_client_account.id}`)}
       }
 
-  let row = table.insertRow(1)
-      row.className = 'uline'
+    let row = table.insertRow(1)
+        row.className = 'uline'
 
-  let cell = []
+    let cell = []
 
-    for (let i = 0; i <= 2; ++i) {
-      cell[i] = row.insertCell(i)
-      cell[i].appendChild(a[i])
-      cell[i].style.textAlign = "center"
-    }
+      for (let i = 0; i <= 2; ++i) {
+        cell[i] = row.insertCell(i)
+        cell[i].appendChild(a[i])
+        cell[i].style.textAlign = "center"
+      }
   })
 }
 
