@@ -1,4 +1,4 @@
-# demo | bank
+# demo || bank
 
 ![](/public/example.png)
 
