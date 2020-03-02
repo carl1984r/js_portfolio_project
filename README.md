@@ -1,6 +1,6 @@
 # demo || bank
 
-![](/public/example.png)
+![](/public/example0.png)
 
 This single page application allows users to view and create transactions based on client and the associated account.  The application structure includes: HTML, CSS, and JavaScript frontend - Rails API backend.  This is a portfolio project per Flatiron School: Full Stack Web Development.
 
