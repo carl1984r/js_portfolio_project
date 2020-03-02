@@ -51,23 +51,20 @@ if (json.data.length > 0) {
       th[i].appendChild(hr)
     }
 
-    json.included.slice().forEach(account_transacts => {
-    let data = ["date", "transact_type", "description", "amount", "run"]
-    let text = []
-
-      for (let i = 0; i <= 4; ++i) {
-        text[i] = document.createTextNode(`${account_transacts["attributes"][data[i]]}`)
-      }
-
+  json.included.slice().forEach(account_transacts => {
+    let account_transaction = new AccountTransaction(account_transacts["attributes"]["description"], account_transacts["attributes"]["amount"], account_transacts["id"], account_transacts["attributes"]["transact_type"],account_transacts["attributes"]["run"], account_transacts["attributes"]["date"])
+    let data = ["date", "transact_type", "description", "amount", "running_balance"]
     let row = table.insertRow(1)
-
+    let text = []
     let cell = []
 
       for (let i = 0; i <= 4; ++i) {
+        text[i] = document.createTextNode(`${account_transaction[data[i]]}`)
         cell[i] = row.insertCell(i)
         cell[i].appendChild(text[i])
         cell[i].style.textAlign = "center"
       }
+
     })
 
     let row = document.getElementsByTagName("tr")
@@ -175,12 +172,13 @@ if (json.data.length > 0) {
 }
 
 class AccountTransaction {
-  constructor(description, amount, id, transact_type, running_balance) {
+  constructor(description, amount, id, transact_type, running_balance, date) {
     this.description = description;
     this.amount = amount;
     this.id = id;
     this.transact_type = transact_type;
     this.running_balance = running_balance;
+    this.date = date;
   }
 }
 
