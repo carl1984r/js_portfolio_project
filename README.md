@@ -36,7 +36,7 @@ js_portfolio_project/frontend/index.html
 
 [Watch this video](#) to learn more about app utilization.
 
-[View the blog](#) about producing this single page app.
+[View the blog](https://carl1984r.github.io/js_portfolio_project_-_03_03_2020) about producing this single page app.
 
 # Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/carl1984r/js_portfolio_project.
