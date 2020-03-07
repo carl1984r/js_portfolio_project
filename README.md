@@ -20,6 +20,13 @@ $ rake db:migrate
 
 ```
 
+Populate database:
+
+```
+$ rake db:seed
+
+```
+
 Run app via starting a new server
 
 ```
@@ -34,7 +41,7 @@ js_portfolio_project/frontend/index.html
 
 ```
 
-[Watch this video](#) to learn more about app utilization.
+[Watch this video](https://drive.google.com/open?id=1QedNmPCxzIkAyqPJXT0fLLw80BKu-xvJ) to learn more about app utilization.
 
 [View the blog](https://carl1984r.github.io/js_portfolio_project_-_03_03_2020) about producing this single page app.
 
