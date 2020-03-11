@@ -88,6 +88,10 @@ form {
   padding-right: 30px;
 }
 
+#sort_button {
+  margin-bottom: 10px;
+}
+
 .divider {
   padding-left: 35px;
   padding-right: 15px;

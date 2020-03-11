@@ -24,9 +24,35 @@ const caption1 = document.querySelector('div.item.content-1 table#table2 caption
 const caption2 = document.querySelector('div.item.content-2 table#table3 caption')
 const footer = document.querySelector('div.item.footer')
 const th = document.querySelectorAll("th")
+const table = document.querySelector('div.item.content-2 table#table3 tbody')
+
+function tableSort() {
+  let rows, switching, i, x, y, doSwitch
+  switching = true;
+    while (switching) {
+
+    switching = false;
+    rows = table.rows;
+
+    for (i = 1; i < (rows.length); i++) {
+
+      doSwitch = false;
+      x = rows[i].getElementsByTagName("td")[3]
+      y = rows[i + 1].getElementsByTagName("td")[3]
+
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        doSwitch = true;
+        break;
+      }
+    }
+    if (doSwitch) {
+     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+     switching = true;
+   }
+ }
+}
 
 function renderAccountTransacts(json) {
-  let table = document.querySelector('div.item.content-2 table#table3 tbody')
   let hr1 = document.createElement('hr')
 
     caption2.textContent = "Account Balance/Transaction history"
@@ -37,6 +63,12 @@ function renderAccountTransacts(json) {
     table.classList.add('fade-in')
 
 if (json.data.length > 0) {
+
+  let sort_button = document.createElement("button")
+    sort_button.setAttribute("id", "sort_button")
+    sort_button.innerHTML = "Sort by amount"
+    sort_button.onclick = function() {tableSort()}
+    caption2.appendChild(sort_button)
 
   let g
     for (g = table.rows.length - 1; g > 0; g--) {
@@ -181,7 +213,7 @@ class AccountTransaction {
     this.date = date;
   }
 }
-
+//Add PreventDefault
 function submitEvent() {
   let description = document.getElementById("description").value
   let amount = parseFloat((document.getElementById("amount").value).replace(/,/g, ""))
@@ -267,7 +299,7 @@ function renderClientAccounts(json) {
     let data = ["name", "utilization", "number"]
     let link = []
     let a = []
-
+//Abstract into ClientAccount method
       for (let i = 0; i <= 2; ++i) {
         link[i] = document.createTextNode(`${a_client_account[data[i]]}`)
         a[i] = document.createElement('a')
