@@ -85,18 +85,7 @@ if (json.data.length > 0) {
 
   json.included.slice().forEach(account_transacts => {
     let account_transaction = new AccountTransaction(account_transacts["attributes"]["description"], account_transacts["attributes"]["amount"], account_transacts["id"], account_transacts["attributes"]["transact_type"],account_transacts["attributes"]["run"], account_transacts["attributes"]["date"])
-    let data = ["date", "transact_type", "description", "amount", "running_balance"]
-    let row = table.insertRow(1)
-    let text = []
-    let cell = []
-
-      for (let i = 0; i <= 4; ++i) {
-        text[i] = document.createTextNode(`${account_transaction[data[i]]}`)
-        cell[i] = row.insertCell(i)
-        cell[i].appendChild(text[i])
-        cell[i].style.textAlign = "center"
-      }
-
+        account_transaction.buildAccountTransactions()
     })
 
     let row = document.getElementsByTagName("tr")
@@ -203,6 +192,15 @@ if (json.data.length > 0) {
   }
 }
 
+function getFormattedDate() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+
+    return month + day + year;
+}
+
 class AccountTransaction {
   constructor(description, amount, id, transact_type, running_balance, date) {
     this.description = description;
@@ -211,8 +209,39 @@ class AccountTransaction {
     this.transact_type = transact_type;
     this.running_balance = running_balance;
     this.date = date;
+    this.updated_amount = (this.transact_type == "debit") ? this.amount*-1 : this.amount;
+    this.updated_balance = this.updated_amount + this.running_balance;
+  }
+
+  buildAccountTransactions() {
+    let data = [this.date, this.transact_type, this.description, this.amount, this.running_balance]
+    let table = document.querySelector('div.item.content-2 table#table3 tbody')
+    let row = table.insertRow(1)
+    let text = []
+    let cell = []
+
+      for (let i = 0; i <= 4; ++i) {
+        text[i] = document.createTextNode(`${data[i]}`)
+        cell[i] = row.insertCell(i)
+        cell[i].appendChild(text[i])
+        cell[i].style.textAlign = "center"
+      }
+  }
+
+  addAccountTransaction() {
+    let row = table.insertRow(1);
+    let data = [getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
+    let text = [];
+    let cell = [];
+    for (let i = 0; i <= 4; ++i) {
+          cell[i] = row.insertCell(i)
+          text[i] = document.createTextNode(data[i])
+          cell[i].appendChild(text[i])
+          cell[i].style.textAlign = "center"
+        }
   }
 }
+
 //Add PreventDefault
 function submitEvent() {
   let description = document.getElementById("description").value
@@ -234,7 +263,8 @@ function submitEvent() {
         body: JSON.stringify(account_transaction),
       })
       alert("Account updated")
-      fetchAccountTransacts(id)
+      account_transaction.addAccountTransaction()
+
     } else {
       alert("Please input a valid amount")
     }
@@ -249,6 +279,27 @@ class ClientAccount {
     this.utilization = utilization
     this.number = number
     this.id = id
+  }
+
+  buildClientAccounts() {
+    let table = document.querySelector('div.item.content-1 table#table2 tbody')
+    let data = [this.name, this.utilization, this.number, this.id]
+    let link = []
+    let a = []
+    let cell = []
+
+    let row = table.insertRow(1)
+        row.className = 'uline'
+
+      for (let i = 0; i <= 2; ++i) {
+        link[i] = document.createTextNode(`${data[i]}`)
+        a[i] = document.createElement('a')
+        a[i].appendChild(link[i])
+        a[i].onclick = function() {fetchAccountTransacts(`${data[3]}`)}
+        cell[i] = row.insertCell(i)
+        cell[i].appendChild(a[i])
+        cell[i].style.textAlign = "center"
+      }
   }
 }
 
@@ -296,27 +347,7 @@ function renderClientAccounts(json) {
 
   json.included.slice().reverse().forEach(client_account => {
     let a_client_account = new ClientAccount(client_account["attributes"]["name"], client_account["attributes"]["utilization"], client_account["attributes"]["number"], client_account["id"])
-    let data = ["name", "utilization", "number"]
-    let link = []
-    let a = []
-//Abstract into ClientAccount method
-      for (let i = 0; i <= 2; ++i) {
-        link[i] = document.createTextNode(`${a_client_account[data[i]]}`)
-        a[i] = document.createElement('a')
-        a[i].appendChild(link[i])
-        a[i].onclick = function() {fetchAccountTransacts(`${a_client_account.id}`)}
-      }
-
-    let row = table.insertRow(1)
-        row.className = 'uline'
-
-    let cell = []
-
-      for (let i = 0; i <= 2; ++i) {
-        cell[i] = row.insertCell(i)
-        cell[i].appendChild(a[i])
-        cell[i].style.textAlign = "center"
-      }
+        a_client_account.buildClientAccounts()
   })
 }
 
