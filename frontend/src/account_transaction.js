@@ -180,3 +180,8 @@ if (json.data.length > 0) {
     }
   }
 }
+
+function fetchAccountTransacts(id) {
+  let url = `${ACCOUNT_TRANSACTS_URL}/${id}`
+  fetch(url).then(resp => resp.json()).then(json => renderAccountTransacts(json))
+}

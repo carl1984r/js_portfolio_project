@@ -75,3 +75,8 @@ function renderClientAccounts(json) {
         a_client_account.buildClientAccounts()
   })
 }
+
+function fetchClientAccounts(id) {
+  let url = `${CLIENT_ACCOUNTS_URL}/${id}`
+  fetch(url).then(resp => resp.json()).then(json => renderClientAccounts(json))
+}

@@ -5,21 +5,6 @@ const ACCOUNTS_URL = `${BASE_URL}/accounts`;
 const CLIENT_ACCOUNTS_URL = `${BASE_URL}/client_accounts`;
 const ACCOUNT_TRANSACTS_URL = `${BASE_URL}/account_transacts`;
 
-
-function fetchClients() {
-  fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json))
-  }
-
-function fetchClientAccounts(id) {
-  let url = `${CLIENT_ACCOUNTS_URL}/${id}`
-  fetch(url).then(resp => resp.json()).then(json => renderClientAccounts(json))
-}
-
-function fetchAccountTransacts(id) {
-  let url = `${ACCOUNT_TRANSACTS_URL}/${id}`
-  fetch(url).then(resp => resp.json()).then(json => renderAccountTransacts(json))
-}
-
 const caption1 = document.querySelector('div.item.content-1 table#table2 caption')
 const caption2 = document.querySelector('div.item.content-2 table#table3 caption')
 const footer = document.querySelector('div.item.footer')

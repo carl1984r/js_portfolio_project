@@ -25,9 +25,13 @@ function renderClients(json) {
   td.className = 'fade-in'
 
   caption.appendChild(hr)
-  
+
   json.data.forEach(client => {
     let a_client = new Client(client["attributes"]["name"], client["id"])
         a_client.buildClient()
   })
 }
+
+function fetchClients() {
+  fetch(CLIENTS_URL).then(resp => resp.json()).then(json => renderClients(json))
+  }
