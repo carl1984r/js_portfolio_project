@@ -27,7 +27,7 @@ class AccountTransaction {
 
   addAccountTransaction() {
     let row = table.insertRow(1);
-    let data = [getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
+    let data = [FormattedDate.getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
     let text = [];
     let cell = [];
     for (let i = 0; i <= 4; ++i) {
