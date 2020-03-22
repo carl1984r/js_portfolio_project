@@ -181,6 +181,36 @@ if (json.data.length > 0) {
   }
 }
 
+function submitEvent() {
+  let description = document.getElementById("description").value
+  let amount = parseFloat((document.getElementById("amount").value).replace(/,/g, ""))
+  let amountReg = /^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/
+  let id = document.getElementsByTagName("form")[0].id
+  let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
+  let running_balance = parseFloat(document.getElementById("hidden0").value)
+
+  if (description != '' && amount != '') {
+    if (amountReg.test(amount) && amount > 0) {
+      let account_transaction = new AccountTransaction(description, amount, id, transact_type, running_balance)
+
+      fetch(ACCOUNTS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(account_transaction),
+      })
+      alert("Account updated")
+      account_transaction.addAccountTransaction()
+
+    } else {
+      alert("Please input a valid amount")
+    }
+  } else {
+    alert("Account Deposit/Withdrawal form must be fully completed")
+  }
+}
+
 function fetchAccountTransacts(id) {
   let url = `${ACCOUNT_TRANSACTS_URL}/${id}`
   fetch(url).then(resp => resp.json()).then(json => renderAccountTransacts(json))
