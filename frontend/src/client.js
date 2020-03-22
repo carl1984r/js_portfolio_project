@@ -1,7 +1,3 @@
-const td = document.querySelector('div.item.sidebar table#table1 tr td')
-const caption = document.querySelector('div.item.sidebar table#table1 caption')
-const hr = document.createElement('hr')
-
 class Client {
   constructor(name, id) {
     this.name = name

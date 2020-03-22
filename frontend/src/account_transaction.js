@@ -26,6 +26,7 @@ class AccountTransaction {
   }
 
   addAccountTransaction() {
+    let table = document.querySelector('div.item.content-2 table#table3 tbody')
     let row = table.insertRow(1);
     let data = [FormattedDateOrTableSort.getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
     let text = [];

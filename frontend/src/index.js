@@ -9,6 +9,9 @@ const caption1 = document.querySelector('div.item.content-1 table#table2 caption
 const caption2 = document.querySelector('div.item.content-2 table#table3 caption')
 const footer = document.querySelector('div.item.footer')
 const th = document.querySelectorAll("th")
+const td = document.querySelector('div.item.sidebar table#table1 tr td')
+const caption = document.querySelector('div.item.sidebar table#table1 caption')
+const hr = document.createElement('hr')
 
 class FormattedDateOrTableSort {
   static getFormattedDate() {
