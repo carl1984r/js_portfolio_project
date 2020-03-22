@@ -29,7 +29,7 @@ class FormattedDateOrTableSort {
       switching = false;
       rows = table.rows;
 
-      for (i = 1; i < (rows.length); i++) {
+      for (i = 1; i < (rows.length-1); i++) {
 
         doSwitch = false;
         x = rows[i].getElementsByTagName("td")[3]
