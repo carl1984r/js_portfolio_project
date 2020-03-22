@@ -27,7 +27,7 @@ class AccountTransaction {
 
   addAccountTransaction() {
     let row = table.insertRow(1);
-    let data = [FormattedDate.getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
+    let data = [FormattedDateOrTableSort.getFormattedDate(), this.transact_type, this.description, this.updated_amount, this.updated_balance];
     let text = [];
     let cell = [];
     for (let i = 0; i <= 4; ++i) {
@@ -40,6 +40,7 @@ class AccountTransaction {
 }
 
 function renderAccountTransacts(json) {
+  let table = document.querySelector('div.item.content-2 table#table3 tbody')
   let hr1 = document.createElement('hr')
 
     caption2.textContent = "Account Balance/Transaction history"
@@ -54,7 +55,7 @@ if (json.data.length > 0) {
   let sort_button = document.createElement("button")
     sort_button.setAttribute("id", "sort_button")
     sort_button.innerHTML = "Sort by amount"
-    sort_button.onclick = function() {tableSort()}
+    sort_button.onclick = function() {FormattedDateOrTableSort.tableSort()}
     caption2.appendChild(sort_button)
 
   let g
