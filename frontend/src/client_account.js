@@ -70,9 +70,9 @@ function renderClientAccounts(json) {
       th[i].appendChild(hr)
     }
 
-  json.included.slice().reverse().forEach(client_account => {
-    let a_client_account = new ClientAccount(client_account["attributes"]["name"], client_account["attributes"]["utilization"], client_account["attributes"]["number"], client_account["id"])
-        a_client_account.buildClientAccounts()
+  json.included.slice().reverse().forEach(clientAccount => {
+    let aClientAccount = new ClientAccount(clientAccount["attributes"]["name"], clientAccount["attributes"]["utilization"], clientAccount["attributes"]["number"], clientAccount["id"])
+        aClientAccount.buildClientAccounts()
   })
 }
 

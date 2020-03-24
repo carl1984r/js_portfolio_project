@@ -28,26 +28,25 @@ class FormattedDateOrTableSort {
     let rows, switching, i, x, y, doSwitch
     switching = true;
       while (switching) {
+        switching = false;
+        rows = table.rows;
+        const rowsLength = rows.length-1
+        for (i = 1; i < (rowsLength); i++) {
 
-      switching = false;
-      rows = table.rows;
+          doSwitch = false;
+          x = rows[i].getElementsByTagName("td")[3]
+          y = rows[i + 1].getElementsByTagName("td")[3]
 
-      for (i = 1; i < (rows.length-1); i++) {
-
-        doSwitch = false;
-        x = rows[i].getElementsByTagName("td")[3]
-        y = rows[i + 1].getElementsByTagName("td")[3]
-
-        if (Number(x.innerHTML) > Number(y.innerHTML)) {
-          doSwitch = true;
+          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            doSwitch = true;
           break;
+          }
+        }
+        if (doSwitch) {
+         rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+         switching = true;
         }
       }
-      if (doSwitch) {
-       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-       switching = true;
-     }
-   }
   }
 }
 
