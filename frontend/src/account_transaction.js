@@ -53,11 +53,11 @@ function renderAccountTransacts(json) {
 
 if (json.data.length > 0) {
 
-  let sort_button = document.createElement("button")
-    sort_button.setAttribute("id", "sort_button")
-    sort_button.innerHTML = "Sort by amount"
-    sort_button.onclick = function() {FormattedDateOrTableSort.tableSort()}
-    caption2.appendChild(sort_button)
+  let sortButton = document.createElement("button")
+    sortButton.setAttribute("id", "sortButton")
+    sortButton.innerHTML = "Sort by amount"
+    sortButton.onclick = function() {FormattedDateOrTableSort.tableSort()}
+    caption2.appendChild(sortButton)
 
   let g
     for (g = table.rows.length - 1; g > 0; g--) {
@@ -72,9 +72,9 @@ if (json.data.length > 0) {
       th[i].appendChild(hr)
     }
 
-  json.included.slice().forEach(account_transacts => {
-    let account_transaction = new AccountTransaction(account_transacts["attributes"]["description"], account_transacts["attributes"]["amount"], account_transacts["id"], account_transacts["attributes"]["transact_type"],account_transacts["attributes"]["run"], account_transacts["attributes"]["date"])
-        account_transaction.buildAccountTransactions()
+  json.included.slice().forEach(accountTransacts => {
+    let accountTransaction = new AccountTransaction(accountTransacts["attributes"]["description"], accountTransacts["attributes"]["amount"], accountTransacts["id"], accountTransacts["attributes"]["transact_type"],accountTransacts["attributes"]["run"], accountTransacts["attributes"]["date"])
+        accountTransaction.buildAccountTransactions()
     })
 
     let row = document.getElementsByTagName("tr")
@@ -188,22 +188,22 @@ function submitEvent() {
   let amount = parseFloat((document.getElementById("amount").value).replace(/,/g, ""))
   let amountReg = /^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/
   let id = document.getElementsByTagName("form")[0].id
-  let transact_type = document.getElementsByTagName("select")[0].selectedOptions[0].value
-  let running_balance = parseFloat(document.getElementById("hidden0").value)
+  let transactType = document.getElementsByTagName("select")[0].selectedOptions[0].value
+  let runningBalance = parseFloat(document.getElementById("hidden0").value)
 
   if (description != '' && amount != '') {
     if (amountReg.test(amount) && amount > 0) {
-      let account_transaction = new AccountTransaction(description, amount, id, transact_type, running_balance)
+      let accountTransaction = new AccountTransaction(description, amount, id, transactType, runningBalance)
 
       fetch(ACCOUNTS_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(account_transaction),
+        body: JSON.stringify(accountTransaction),
       })
       alert("Account updated")
-      account_transaction.addAccountTransaction()
+      accountTransaction.addAccountTransaction()
 
     } else {
       alert("Please input a valid amount")

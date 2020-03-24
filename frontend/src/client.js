@@ -23,8 +23,8 @@ function renderClients(json) {
   caption.appendChild(hr)
 
   json.data.forEach(client => {
-    let a_client = new Client(client["attributes"]["name"], client["id"])
-        a_client.buildClient()
+    let aClient = new Client(client["attributes"]["name"], client["id"])
+        aClient.buildClient()
   })
 }
 
