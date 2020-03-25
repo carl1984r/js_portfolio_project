@@ -25,25 +25,25 @@ class FormattedDateOrTableSort {
 
   static tableSort() {
     let table = document.querySelector('div.item.content-2 table#table3 tbody')
-    let rows, switching, i, x, y, doSwitch
+    let rows, switching, step, firstRow, secondRow, doSwitch
     switching = true;
       while (switching) {
         switching = false;
         rows = table.rows;
         const rowsLength = rows.length-1
-        for (i = 1; i < (rowsLength); i++) {
+        for (step = 1; step < (rowsLength); step++) {
 
           doSwitch = false;
-          x = rows[i].getElementsByTagName("td")[3]
-          y = rows[i + 1].getElementsByTagName("td")[3]
+          firstRow = rows[step].getElementsByTagName("td")[3]
+          secondRow = rows[step + 1].getElementsByTagName("td")[3]
 
-          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+          if (Number(firstRow.innerHTML) > Number(secondRow.innerHTML)) {
             doSwitch = true;
           break;
           }
         }
         if (doSwitch) {
-         rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+         rows[step].parentNode.insertBefore(rows[step + 1], rows[step]);
          switching = true;
         }
       }
